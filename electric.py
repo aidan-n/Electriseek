@@ -1,8 +1,4 @@
-'''
-Used as an actual library, rather than for the physics_seeker.py client
-(the original version, electric_library, parses user input instead of taking 
-parameters)
-'''
+'A library for electrical physics equations.'
 
 import math
 import numbers
