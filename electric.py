@@ -32,8 +32,8 @@ def capacitor_info(c, v, d, *ret_type):
 
 	if(len(ret_type) != 1):
 		raise Exception('capacitor_info() only takes 4 arguments. The fourth '
-						'specifies whether to return charge \'q\', stored '
-						'energy \'u\', or electric field \'ef\'.')
+				'specifies whether to return charge \'q\', stored '
+				'energy \'u\', or electric field \'ef\'.')
 
 	ret_type = ret_type[0]
 	dict = {}
@@ -48,7 +48,7 @@ def capacitor_info(c, v, d, *ret_type):
 	#raises ValueError if ret_type is not valid
 	if(ret_type not in dict):
 		raise ValueError('Fourth argument must be charge \'q\', stored '
-						'energy \'u\', or electric field \'ef\'.')
+				'energy \'u\', or electric field \'ef\'.')
 
 	return dict[ret_type]
 
@@ -64,15 +64,15 @@ def potential_difference(*args):
 
 	#check for valid arguments
 	ermsg = ('potential_difference() takes 4 arguments. '
-			  'arg1 and arg2 are numerical values. arg3 '
-			  'and arg4 are strings specifying what arg1 '
-			  'and arg2 are respectively. For example, '
-		   	  '(7, 8, \'I\', \'R\') would represent a current '
-			  'of 7 amps and a resistance of 8 ohms.')
+		 'arg1 and arg2 are numerical values. arg3 '
+		 'and arg4 are strings specifying what arg1 '
+		 'and arg2 are respectively. For example, '
+		 '(7, 8, \'I\', \'R\') would represent a current '
+		 'of 7 amps and a resistance of 8 ohms.')
 
-	if(		len(args) != 4
-		or  False in [isinstance(x, numbers.Number) for x in args[0:2]]
-		or  False in [isinstance(s, basestring) for s in args[2:4]]
+	if(	len(args) != 4
+	    or  False in [isinstance(x, numbers.Number) for x in args[0:2]]
+	    or  False in [isinstance(s, basestring) for s in args[2:4]]
 	  ):
 		raise ValueError(ermsg)
 
