@@ -1,4 +1,4 @@
-'A library for electrical physics equations.'
+'''A library for electrical physics equations.'''
 
 import math
 import numbers
