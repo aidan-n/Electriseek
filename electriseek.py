@@ -11,7 +11,7 @@ k = 8988000000 #a proportionality constant, k = 8.988 * 10^9 (N*m^2)/C^2
 
 
 #work needed to pull an electron (charge -e) out to distance (rf) from
-# a fixed proton (charge +e) at initial distance (r0)'''
+# a fixed proton (charge +e) at initial distance (r0)
 def work_needed(r0, r1):
 	w = None
 
