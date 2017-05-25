@@ -1,13 +1,17 @@
-'''A library for electrical physics equations.'''
+'''
+Assume SI units for all variables.
+'''
 
 import math
 import numbers
 
+#constants
 e = 0.0000000000000000001602 #elementary charge, e = 1.602 * 10^-19 Coulombs
 k = 8988000000 #a proportionality constant, k = 8.988 * 10^9 (N*m^2)/C^2
 
+
 #work needed to pull an electron (charge -e) out to distance (rf) from
-# a fixed proton (charge +e) from initial distance (r0)'''
+# a fixed proton (charge +e) at initial distance (r0)'''
 def work_needed(r0, r1):
 	w = None
 
@@ -21,7 +25,7 @@ def work_needed(r0, r1):
 	return w
 
 
-#returns a capacitors charge, stored energy, or electric field,
+#returns a capacitor's charge, stored energy, or electric field,
 # depending on the fourth parameter
 def capacitor_info(c, v, d, *ret_type):
 	#given capacitance C, applied voltage V, distance between plates d
@@ -44,7 +48,7 @@ def capacitor_info(c, v, d, *ret_type):
 	#raises ValueError if ret_type is not valid
 	if(ret_type not in dict):
 		raise ValueError('Fourth argument must be charge \'q\', stored '
-				'energy \'u\', or electric field \'ef\'.')
+				 'energy \'u\', or electric field \'ef\'.')
 
 	return dict[ret_type]
 
@@ -59,25 +63,81 @@ def capacitor_charge(c, v):
 def potential_difference(*args):
 
 	#check for valid arguments
-	ermsg = ('potential_difference() takes 4 arguments. '
-		 'arg1 and arg2 are numerical values. arg3 '
-		 'and arg4 are strings specifying what arg1 '
-		 'and arg2 are respectively. For example, '
-		 '(7, 8, \'I\', \'R\') would represent a current '
+	ermsg = ('potential_difference() takes 4 or 6 arguments. Arguments in the '
+		 'first half are numerical values. Arguments in the second half '
+	         'are strings, specifying what the numerical values are respectively. '
+        	 'For example, (7, 8, \'I\', \'R\') would represent a current '
 		 'of 7 amps and a resistance of 8 ohms.')
 
-	if(	len(args) != 4
-	    or  False in [isinstance(x, numbers.Number) for x in args[0:2]]
-	    or  False in [isinstance(s, basestring) for s in args[2:4]]
+	length = len(args)
+	half = len(args)/2
+
+	if(
+	    length not in [4, 6]
+	    or  False in [isinstance(x, numbers.Number) for x in args[ 0 : half ]]
+	    or  False in [isinstance(s, basestring) for s in args[ half : length ]]
 	  ):
 		raise ValueError(ermsg)
 
-	#connect numerical args to their string args
+
+	#connect (lower-case) string args to their numerical args
 	dic = {}
-	dic[str(args[2])] = int(args[0])
-	dic[str(args[3])] = int(args[1])
+	for i in range(half):
+		dic[str.lower(str(args[ half + i ]))] = int(args[i])
 
-	return 'test_return'
-	
-	#....
 
+	#potential difference v
+	if length == 4:
+
+		if('e' in dic and 'x' in dic):
+			v = (-1) * dic['e'] * dic['x']
+			return v
+
+		if('i' in dic and 'r' in dic):
+			v = dic['i'] * dic['r']
+			return v
+
+		if('p' in dic and 'i' in dic):
+			v = float(dic['p']) / dic['i']
+			return v
+
+		if('w' in dic and 'q' in dic):
+			v = float(dic['w']) / dic['q']
+			return v
+
+		if('q' in dic and 'c' in dic):
+			v = float(dic['q']) / dic['c']
+			return v
+
+		if('p' in dic and 'r' in dic):
+			if( (dic['p'] * dic['r']) < 0 ):
+				ermsg = 'Can not take negative values for power or resistance.'
+				raise ValueError(ermsg)
+			v = math.sqrt(dic['p'] * dic['r'])
+			return v
+
+		if('u' in dic and 'q' in dic):
+			v = (2 * dic['u']) / float(dic['q'])
+			return v
+
+		if('u' in dic and 'c' in dic):
+			v = math.sqrt( (2 * dic['u']) / float(dic['c']) )
+			return v
+
+		raise ValueError('potential_difference() does not support calculation '
+						 'based on the combination of ' + args[2] + ' and ' +
+						 '' + args[3])
+
+	''''''
+	if length == 6:
+
+		if('k' in dic and 'q' in dic and 'r' in dic):
+			v = (dic['k'] * dic['q']) / float(dic['r'])
+			return v
+
+		raise ValueError('potential_difference() does not support calculation '
+						 'based on the combination of ' + args[3] + ', ' +
+						 args[4] + ', ' + 'and ' + args[5])
+
+
+	raise ValueError('Invalid arguments.')
