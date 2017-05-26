@@ -25,40 +25,6 @@ def work_needed(r0, r1):
 	return w
 
 
-#returns a capacitor's charge, stored energy, or electric field,
-# depending on the fourth parameter
-def capacitor_info(c, v, d, *ret_type):
-	#given capacitance C, applied voltage V, distance between plates d
-
-	if(len(ret_type) != 1):
-		raise Exception('capacitor_info() only takes 4 arguments. The fourth '
-				'specifies whether to return charge \'q\', stored '
-				'energy \'u\', or electric field \'ef\'.')
-
-	ret_type = ret_type[0]
-	dict = {}
-
-	#charge on capacitor
-	dict['q'] = c*v
-	#stored energy
-	dict['u'] = 0.5 * dict['q'] * v
-	#electric field
-	dict['ef'] = float(v)/d
-
-	#raises ValueError if ret_type is not valid
-	if(ret_type not in dict):
-		raise ValueError('Fourth argument must be charge \'q\', stored '
-				 'energy \'u\', or electric field \'ef\'.')
-
-	return dict[ret_type]
-
-
-#returns capacitor charge. This can be used when only
-# capacitance and voltage are known.
-def capacitor_charge(c, v):
-	return c*v
-
-
 #calculate potential difference V
 def potential_difference(*args):
 
@@ -141,3 +107,37 @@ def potential_difference(*args):
 
 
 	raise ValueError('Invalid arguments.')
+
+
+#returns a capacitor's charge, stored energy, or electric field,
+# depending on the fourth parameter
+def capacitor_info(c, v, d, *ret_type):
+	#given capacitance C, applied voltage V, distance between plates d
+
+	if(len(ret_type) != 1):
+		raise Exception('capacitor_info() only takes 4 arguments. The fourth '
+				'specifies whether to return charge \'q\', stored '
+				'energy \'u\', or electric field \'ef\'.')
+
+	ret_type = ret_type[0]
+	dict = {}
+
+	#charge on capacitor
+	dict['q'] = c*v
+	#stored energy
+	dict['u'] = 0.5 * dict['q'] * v
+	#electric field
+	dict['ef'] = float(v)/d
+
+	#raises ValueError if ret_type is not valid
+	if(ret_type not in dict):
+		raise ValueError('Fourth argument must be charge \'q\', stored '
+				 'energy \'u\', or electric field \'ef\'.')
+
+	return dict[ret_type]
+
+
+#returns capacitor charge. This can be used when only
+# capacitance and voltage are known.
+def capacitor_charge(c, v):
+	return c*v
