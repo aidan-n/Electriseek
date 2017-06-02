@@ -91,8 +91,8 @@ def potential_difference(*args):
 			return v
 
 		raise ValueError('potential_difference() does not support calculation '
-						 'based on the combination of ' + args[2] + ' and ' +
-						 '' + args[3])
+				 'based on the combination of ' + args[2] + ' and ' +
+				 '' + args[3])
 
 	''''''
 	if length == 6:
@@ -102,8 +102,8 @@ def potential_difference(*args):
 			return v
 
 		raise ValueError('potential_difference() does not support calculation '
-						 'based on the combination of ' + args[3] + ', ' +
-						 args[4] + ', ' + 'and ' + args[5])
+				 'based on the combination of ' + args[3] + ', ' +
+				 args[4] + ', ' + 'and ' + args[5])
 
 
 	raise ValueError('Invalid arguments.')
@@ -141,10 +141,10 @@ def charge(*args):
 
 	#check for valid arguments
 	ermsg = ('charge() takes 4 arguments. Arguments in the '
-			  'first half are numerical values. Arguments in the second half '
-			  'are strings, specifying what the numerical values are respectively. '
-		   	  'For example, (7, 8, \'V\', \'C\') would represent '
-			  'a potential difference of 7 volts and a capacitance of 8 farads.')
+		 'first half are numerical values. Arguments in the second half '
+		 'are strings, specifying what the numerical values are respectively. '
+		 'For example, (7, 8, \'V\', \'C\') would represent '
+	         'a potential difference of 7 volts and a capacitance of 8 farads.')
 
 	length = len(args)
 	half = len(args)/2
@@ -184,9 +184,9 @@ def charge(*args):
 			q = dic['t'] * dic['i']
 			return q
 
-		raise ValueError('potential_difference() does not support calculation '
-						 'based on the combination of ' + args[2] + ' and ' +
-						 '' + args[3])
+		raise ValueError('charge() does not support calculation '
+				 'based on the combination of ' + args[2] + ' and ' +
+				 '' + args[3])
 
 
 	raise ValueError('Invalid arguments.')
