@@ -164,7 +164,6 @@ def charge(*args):
 
 
 	#charge q
-
 	if length == 4:
 
 		if('c' in dic and 'v' in dic):
