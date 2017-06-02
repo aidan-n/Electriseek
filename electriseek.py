@@ -163,7 +163,6 @@ def charge(*args):
 		dic[str.lower(str(args[ half + i ]))] = int(args[i])
 
 
-
 	#charge q
 
 	if length == 4:
