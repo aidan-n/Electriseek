@@ -151,8 +151,8 @@ def charge(*args):
 
 	if(
 	    length != 4
-		or  False in [isinstance(x, numbers.Number) for x in args[ 0 : half ]]
-		or  False in [isinstance(s, basestring) for s in args[ half : length ]]
+	    or  False in [isinstance(x, numbers.Number) for x in args[ 0 : half ]]
+	    or  False in [isinstance(s, basestring) for s in args[ half : length ]]
 	  ):
 		raise ValueError(ermsg)
 
