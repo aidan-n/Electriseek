@@ -137,7 +137,56 @@ def capacitor_info(c, v, d, *ret_type):
 	return dict[ret_type]
 
 
-#returns capacitor charge. This can be used when only
-# capacitance and voltage are known.
-def capacitor_charge(c, v):
-	return c*v
+def charge(*args):
+
+	#check for valid arguments
+	ermsg = ('charge() takes 4 arguments. Arguments in the '
+			  'first half are numerical values. Arguments in the second half '
+			  'are strings, specifying what the numerical values are respectively. '
+		   	  'For example, (7, 8, \'V\', \'C\') would represent '
+			  'a potential difference of 7 volts and a capacitance of 8 farads.')
+
+	length = len(args)
+	half = len(args)/2
+
+	if(
+	    length != 4
+		or  False in [isinstance(x, numbers.Number) for x in args[ 0 : half ]]
+		or  False in [isinstance(s, basestring) for s in args[ half : length ]]
+	  ):
+		raise ValueError(ermsg)
+
+
+	#connect (lower-case) string args to their numerical args
+	dic = {}
+	for i in range(half):
+		dic[str.lower(str(args[ half + i ]))] = int(args[i])
+
+
+
+	#charge q
+
+	if length == 4:
+
+		if('c' in dic and 'v' in dic):
+			q = dic['c'] * dic['v']
+			return q
+
+		if('w' in dic and 'v' in dic):
+			q = float(dic['w']) / dic['v']
+			return q
+
+		if('u' in dic and 'v' in dic):
+			q = (2 * dic['u']) / float(dic['v'])
+			return q
+
+		if('t' in dic and 'i' in dic):
+			q = dic['t'] * dic['i']
+			return q
+
+		raise ValueError('potential_difference() does not support calculation '
+						 'based on the combination of ' + args[2] + ' and ' +
+						 '' + args[3])
+
+
+	raise ValueError('Invalid arguments.')
