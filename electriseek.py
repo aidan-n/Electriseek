@@ -18,7 +18,7 @@ def work_needed(r0, r1):
 	#work already done
 	w0 = (k*e*e)/r0
 	#total work from origin
-	w1 = (k*e*e)/rf
+	w1 = (k*e*e)/r1
 
 	#work needed to reach rf from r0
 	w = math.fabs(w1 - w0)
