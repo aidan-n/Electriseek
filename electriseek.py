@@ -10,7 +10,7 @@ e = 0.0000000000000000001602 #elementary charge, e = 1.602 * 10^-19 Coulombs
 k = 8988000000 #a proportionality constant, k = 8.988 * 10^9 (N*m^2)/C^2
 
 
-#work needed to pull an electron (charge -e) out to distance (rf) from
+#work needed to pull an electron (charge -e) out to distance (r1) from
 # a fixed proton (charge +e) at initial distance (r0)
 def work_needed(r0, r1):
 	w = None
@@ -20,7 +20,7 @@ def work_needed(r0, r1):
 	#total work from origin
 	w1 = (k*e*e)/r1
 
-	#work needed to reach rf from r0
+	#work needed to reach r1 from r0
 	w = math.fabs(w1 - w0)
 	return w
 
